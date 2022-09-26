@@ -1,0 +1,7 @@
+{
+  "name": "r-curd",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
