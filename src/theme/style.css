@@ -1,0 +1,20 @@
+.myContainer {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mainTitle {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.myWrap {
+  width: 80%;
+}
+
+.m1-5 {
+  margin-top: 1.5rem;
+}

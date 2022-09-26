@@ -8,35 +8,35 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import { useState } from "react";
-import axios from "axios";
+import Axios from "axios";
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   let hs = useHistory();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     let formData = new FormData();
 
-    formData.append("action", "LOGIN");
+    formData.append("action", "SIGNUP");
+    formData.append("name", name);
+    formData.append("email", email);
     formData.append("username", username);
     formData.append("password", password);
 
-    axios
-      .post(
-        "http://localhost/Harman/Node/iconic/r-curd/server/axios.php",
-        formData
-      )
+    Axios.post(
+      "http://localhost/Harman/Node/iconic/r-curd/server/axios.php",
+      formData
+    )
       .then((result: any) => {
-        if (result.data != null) {
-          hs.push("/home");
-        } else {
-          alert("Invalid Username and password");
-        }
+        console.log(result.data);
       })
       .catch((err: any) => {
         console.log(err);
       });
+    // hs.push("/login");
   };
 
   return (
@@ -45,7 +45,29 @@ const Login: React.FC = () => {
         <div className="myContainer">
           <div className="myWrap">
             <div>
-              <h1 className="mainTitle">Login</h1>
+              <h1 className="mainTitle">Sign Up</h1>
+            </div>
+            <div className="m1-5">
+              <IonItem>
+                <IonLabel position="floating">Full Name</IonLabel>
+                <IonInput
+                  type="text"
+                  value={name}
+                  name="name"
+                  onIonChange={(e: any) => setName(e.detail.value)}
+                ></IonInput>
+              </IonItem>
+            </div>
+            <div className="m1-5">
+              <IonItem>
+                <IonLabel position="floating">Email</IonLabel>
+                <IonInput
+                  type="text"
+                  name="email"
+                  value={email}
+                  onIonChange={(e: any) => setEmail(e.detail.value)}
+                ></IonInput>
+              </IonItem>
             </div>
             <div className="m1-5">
               <IonItem>
@@ -70,12 +92,12 @@ const Login: React.FC = () => {
               </IonItem>
             </div>
             <div className="m1-5">
-              <IonButton expand="full" onClick={() => handleLogin()}>
-                Login
+              <IonButton expand="full" onClick={() => handleSignup()}>
+                Signup
               </IonButton>
             </div>
-            <div className="m1-5" onClick={() => hs.push("/signup")}>
-              Register here
+            <div className="m1-5" onClick={() => hs.push("/login")}>
+              Login here
             </div>
           </div>
         </div>
@@ -84,4 +106,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;
